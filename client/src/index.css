@@ -9,8 +9,16 @@
 }
 
 * {
+  font-weight: 1000;
+}
+
+* {
   margin: 0;
   font-family: "Roboto", sans-serif;
+}
+
+body {
+  background-color: #faf9f8;
 }
 
 img,
