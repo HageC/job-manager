@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { Logo } from "../components";
 import { Link } from "react-router-dom";
 import mainjob from "../assets/main-job.svg";
 const StyleWrapper = styled.div`
