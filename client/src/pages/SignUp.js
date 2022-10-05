@@ -5,7 +5,15 @@ const SignUp = () => {
 
   const [formValues, setFormValues] = useState(values);
 
-  return <div>SignUp</div>;
+  return (
+    <>
+      <form>
+        <h1>Login</h1>
+
+        <input type="text" />
+      </form>
+    </>
+  );
 };
 
 export default SignUp;

@@ -4,18 +4,6 @@ import { Logo } from "../components";
 import { Link } from "react-router-dom";
 import mainjob from "../assets/main-job.svg";
 const StyleWrapper = styled.div`
-  .nav-bar {
-    background-color: #00f;
-    height: 5rem;
-    padding: 0.5rem;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  }
-
-  .nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
   .main-section {
     margin: 8rem auto 0 auto;
     max-width: 1200px;
@@ -61,12 +49,6 @@ const StyleWrapper = styled.div`
 const Home = () => {
   return (
     <StyleWrapper>
-      <div className="nav-bar">
-        <div className="nav-container">
-          <Logo />
-        </div>
-      </div>
-
       <div className="main-section">
         <h1>
           Job <span>Manager</span> App
