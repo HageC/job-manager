@@ -7,7 +7,7 @@ const StyleWrapper = styled.div`
     border-top: 5px solid #00f;
     border-radius: 4px;
     max-width: 400px;
-    height: 560px;
+    max-height: 560px;
     margin: 10rem auto 0 auto;
   }
 
@@ -41,7 +41,7 @@ const StyleWrapper = styled.div`
   .change {
     border: none;
     background-color: transparent;
-    margin: 0 2px;
+    margin: 0 4px;
     padding: 0;
     font-weight: bold;
     color: #00f;
@@ -76,6 +76,7 @@ const StyleWrapper = styled.div`
     text-align: center;
     margin: 0 auto;
     font-weight: 500;
+    padding-bottom: 2rem;
   }
 `;
 const SignUp = () => {
@@ -90,22 +91,27 @@ const SignUp = () => {
   return (
     <StyleWrapper>
       <form className="signup-form" onSubmit={(e) => e.preventDefault()}>
-        <h1>Login</h1>
-        <div className="form-input">
-          <label htmlFor="name">Username</label>
-          <input
-            type="text"
-            name="name"
-            autoComplete="true"
-            onChange={onChange}
-          />
-        </div>
+        <h1>{formValues.hasAccount ? "Login" : "Sign up"}</h1>
+
+        {formValues.hasAccount && (
+          <div className="form-input">
+            <label htmlFor="name">Username</label>
+            <input
+              value={formValues.name}
+              type="text"
+              name="name"
+              autoComplete="true"
+              onChange={onChange}
+            />
+          </div>
+        )}
 
         <div className="form-input">
           <label htmlFor="email">Email</label>
           <input
             type="text"
             name="email"
+            value={formValues.email}
             autoComplete="true"
             onChange={onChange}
           />
@@ -115,27 +121,30 @@ const SignUp = () => {
           <input
             type="password"
             name="password"
+            value={formValues.password}
             autoComplete="true"
             onChange={onChange}
           />
         </div>
 
         <button className="submit-btn" type="submit">
-          Login
+          {formValues.hasAccount ? "Login" : "Sign up"}
         </button>
 
         <p>
-          Already have an account?{" "}
+          Already have an account?
           <button
             className="change"
             onClick={() =>
               setFormValues({
-                ...formValues,
+                email: "",
+                password: "",
+                name: "",
                 hasAccount: !formValues.hasAccount,
               })
             }
           >
-            Login{" "}
+            {formValues.hasAccount ? "Sign up" : "Login"}
           </button>
         </p>
       </form>
