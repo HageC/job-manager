@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+}
+
 * {
   font-weight: 1000;
 }
