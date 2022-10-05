@@ -17,7 +17,7 @@ const StyleWrapper = styled.div`
   }
 
   .main-section {
-    margin: 10rem auto 0 auto;
+    margin: 8rem auto 0 auto;
     max-width: 1200px;
   }
 
