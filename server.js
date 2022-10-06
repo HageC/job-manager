@@ -1,11 +1,15 @@
 import express from "express";
 import notFound from "./middleware/not-found.js";
 import errorHandler from "./middleware/error-handler.js";
+import userRouter from "./routes/userRouter.js";
+import jobsRouter from "./routes/jobsRouter.js";
 import mongoose from "mongoose";
 import "dotenv/config";
-import { start } from "repl";
 const app = express();
 const port = process.env.PORT || 3000;
+
+app.use("/api/user/", userRouter);
+app.use("/api/jobs/", jobsRouter);
 
 app.use(notFound);
 app.use(errorHandler);
