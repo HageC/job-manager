@@ -1,3 +1,3 @@
 import Logo from "./Logo";
-
-export { Logo };
+import Notification from "./Notification";
+export { Logo, Notification };

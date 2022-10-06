@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Notification } from "../components";
+import { useGlobalState } from "../context/stateContext";
 const StyleWrapper = styled.div`
   .signup-form {
     background-color: #fff;
@@ -81,18 +83,24 @@ const StyleWrapper = styled.div`
 `;
 const SignUp = () => {
   const values = { hasAccount: true, name: "", email: "", password: "" };
-
+  const { notification } = useGlobalState();
   const [formValues, setFormValues] = useState(values);
 
   const onChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
+  const onSubmit = async (e) => {
+    const { name, email, password, hasAccount } = formValues;
+
+    if ((!name && !hasAccount) || !email || !password) {
+    }
+  };
+
   return (
     <StyleWrapper>
       <form className="signup-form" onSubmit={(e) => e.preventDefault()}>
         <h1>{formValues.hasAccount ? "Login" : "Sign up"}</h1>
-
         {formValues.hasAccount && (
           <div className="form-input">
             <label htmlFor="name">Username</label>
@@ -127,10 +135,10 @@ const SignUp = () => {
           />
         </div>
 
+        {notification && <Notification />}
         <button className="submit-btn" type="submit">
           {formValues.hasAccount ? "Login" : "Sign up"}
         </button>
-
         <p>
           Already have an account?
           <button
