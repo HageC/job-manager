@@ -103,7 +103,7 @@ const SignUp = () => {
     <StyleWrapper>
       <form className="signup-form" onSubmit={onSubmit}>
         <h1>{formValues.hasAccount ? "Login" : "Sign up"}</h1>
-        {formValues.hasAccount && (
+        {!formValues.hasAccount && (
           <div className="form-input">
             <label htmlFor="name">Username</label>
             <input
