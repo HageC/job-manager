@@ -53,3 +53,13 @@ h6 {
 }
 
 /* Notification Styles */
+
+.notification {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.error {
+  color: red;
+  text-decoration: underline;
+}

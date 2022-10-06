@@ -3,7 +3,11 @@ import { useGlobalState } from "../context/stateContext";
 
 const Notification = () => {
   const { notificationValue, notificationType } = useGlobalState();
-  return <div className={notificationValue}>{notificationValue}</div>;
+  return (
+    <div className={`notification ${notificationType}`}>
+      {notificationValue}
+    </div>
+  );
 };
 
 export default Notification;

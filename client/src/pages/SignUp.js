@@ -9,7 +9,7 @@ const StyleWrapper = styled.div`
     border-top: 5px solid #00f;
     border-radius: 4px;
     max-width: 400px;
-    max-height: 560px;
+    max-height: 700px;
     margin: 10rem auto 0 auto;
   }
 
@@ -83,7 +83,7 @@ const StyleWrapper = styled.div`
 `;
 const SignUp = () => {
   const values = { hasAccount: true, name: "", email: "", password: "" };
-  const { notification } = useGlobalState();
+  const { notification, inputError } = useGlobalState();
   const [formValues, setFormValues] = useState(values);
 
   const onChange = (e) => {
@@ -91,15 +91,17 @@ const SignUp = () => {
   };
 
   const onSubmit = async (e) => {
+    e.preventDefault();
     const { name, email, password, hasAccount } = formValues;
 
     if ((!name && !hasAccount) || !email || !password) {
+      inputError();
     }
   };
 
   return (
     <StyleWrapper>
-      <form className="signup-form" onSubmit={(e) => e.preventDefault()}>
+      <form className="signup-form" onSubmit={onSubmit}>
         <h1>{formValues.hasAccount ? "Login" : "Sign up"}</h1>
         {formValues.hasAccount && (
           <div className="form-input">
