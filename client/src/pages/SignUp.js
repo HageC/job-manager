@@ -83,7 +83,7 @@ const StyleWrapper = styled.div`
 `;
 const SignUp = () => {
   const values = { hasAccount: true, name: "", email: "", password: "" };
-  const { notification, inputError } = useGlobalState();
+  const { notification, inputError, removeNotification } = useGlobalState();
   const [formValues, setFormValues] = useState(values);
 
   const onChange = (e) => {
@@ -145,14 +145,17 @@ const SignUp = () => {
           Already have an account?
           <button
             className="change"
-            onClick={() =>
+            type="button"
+            onClick={() => {
               setFormValues({
                 email: "",
                 password: "",
                 name: "",
                 hasAccount: !formValues.hasAccount,
-              })
-            }
+              });
+
+              removeNotification();
+            }}
           >
             {formValues.hasAccount ? "Sign up" : "Login"}
           </button>

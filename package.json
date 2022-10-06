@@ -1,0 +1,26 @@
+{
+  "name": "job-manager",
+  "version": "1.0.0",
+  "description": "a full stack app using react, nodejs, and mongodb to create and view job postings",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HageC/job-manager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HageC/job-manager/issues"
+  },
+  "homepage": "https://github.com/HageC/job-manager#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.20"
+  }
+}

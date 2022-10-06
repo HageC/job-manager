@@ -14,9 +14,6 @@ const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialValues);
 
   const inputError = () => {
-    if (state.notification) {
-      removeNotification();
-    }
     dispatch({ type: "INPUT_ERROR" });
   };
 
@@ -25,7 +22,7 @@ const AppProvider = ({ children }) => {
   };
 
   return (
-    <AppContext.Provider value={{ ...state, inputError }}>
+    <AppContext.Provider value={{ ...state, inputError, removeNotification }}>
       {children}
     </AppContext.Provider>
   );
