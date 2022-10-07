@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/HageC/job-manager#readme",
   "dependencies": {
+    "axios": "^1.1.2",
     "bcryptjs": "^2.4.3",
     "concurrently": "^7.4.0",
     "dotenv": "^16.0.3",

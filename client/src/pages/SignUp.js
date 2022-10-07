@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Notification } from "../components";
 import { useGlobalState } from "../context/stateContext";
@@ -74,6 +75,10 @@ const StyleWrapper = styled.div`
     cursor: pointer;
   }
 
+  .submit-btn:disabled {
+    cursor: not-allowed;
+  }
+
   p {
     text-align: center;
     margin: 0 auto;
@@ -82,8 +87,16 @@ const StyleWrapper = styled.div`
   }
 `;
 const SignUp = () => {
+  const navigate = useNavigate();
   const values = { hasAccount: true, name: "", email: "", password: "" };
-  const { notification, inputError, removeNotification } = useGlobalState();
+  const {
+    notification,
+    inputError,
+    removeNotification,
+    authenticateUser,
+    user,
+    loading,
+  } = useGlobalState();
   const [formValues, setFormValues] = useState(values);
 
   const onChange = (e) => {
@@ -96,8 +109,23 @@ const SignUp = () => {
 
     if ((!name && !hasAccount) || !email || !password) {
       inputError();
+      return;
+    }
+
+    const inputUser = { name, email, password };
+
+    if (hasAccount) {
+      authenticateUser(inputUser, "login");
+    } else {
+      authenticateUser(inputUser, "register");
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   return (
     <StyleWrapper>
@@ -138,7 +166,7 @@ const SignUp = () => {
         </div>
 
         {notification && <Notification />}
-        <button className="submit-btn" type="submit">
+        <button className="submit-btn" type="submit" disabled={loading}>
           {formValues.hasAccount ? "Login" : "Sign up"}
         </button>
         <p>

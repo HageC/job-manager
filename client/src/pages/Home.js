@@ -53,7 +53,7 @@ const Home = () => {
           Job <span>Manager</span> App
         </h1>
         <img src={mainjob} alt="" />
-        <Link to={"/register"}>
+        <Link to={"/signup"}>
           <button>Login or Register</button>
         </Link>
       </div>

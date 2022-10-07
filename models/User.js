@@ -31,6 +31,10 @@ const UserSchema = new mongoose.Schema({
     maxlength: 20,
     default: "",
   },
+  date: {
+    type: Date,
+    default: Date.now(),
+  },
 });
 
 UserSchema.pre("save", async function () {

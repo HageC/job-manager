@@ -6,9 +6,13 @@ const errorHandler = (err, req, res, next) => {
 
   if (err.name === "ValidationError") {
     defaults.statusCode = 400;
-    defaults.message = Object.values(err.errors)
-      .map((error) => error.message)
-      .join(" ");
+    defaults.message = Object.keys(err.errors)
+      .map((error) => error.charAt(0).toUpperCase() + error.slice(1))
+      .join(", ");
+
+    defaults.message = `${defaults.message} ${
+      defaults.message.split(", ").length > 1 ? "are" : "is"
+    } invalid`;
   }
 
   if (err.code && err.code === 11000) {
