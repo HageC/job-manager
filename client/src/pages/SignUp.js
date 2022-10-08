@@ -117,7 +117,7 @@ const SignUp = () => {
     if (hasAccount) {
       authenticateUser(inputUser, "login");
     } else {
-      authenticateUser(inputUser, "register");
+      authenticateUser(inputUser, "signup");
     }
   };
 

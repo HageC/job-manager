@@ -4,9 +4,12 @@ import reducer from "./reducer";
 import axios from "axios";
 const AppContext = React.createContext();
 
+const user = localStorage.getItem("user");
+const token = localStorage.getItem("token");
+
 const initialValues = {
-  user: null,
-  token: null,
+  user: user ? JSON.parse(user) : null,
+  token: token,
   location: "",
   notification: false,
   notificationValue: "",
@@ -27,16 +30,28 @@ const AppProvider = ({ children }) => {
 
   const authenticateUser = async (inputUser, action) => {
     dispatch({ type: "SET_LOADING" });
+    const endpoint = action;
     try {
-      const response = await axios.post("/api/user/signup", inputUser);
+      const response = await axios.post(`/api/user/${endpoint}`, inputUser);
       const { user, token } = response.data;
       dispatch({ type: "AUTHENTICATE_SUCCESS", payload: { user, token } });
+      saveLocalStorage({ user, token });
     } catch (error) {
       dispatch({
         type: "AUTHENTICATE_ERROR",
         payload: { message: error.response.data.message },
       });
     }
+  };
+
+  const saveLocalStorage = ({ user, token }) => {
+    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("token", token);
+  };
+
+  const deleteLocalStorage = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
   };
 
   return (
