@@ -165,7 +165,7 @@ const SignUp = () => {
           />
         </div>
 
-        {notification && <Notification />}
+        {notification && <Notification setFormValues={setFormValues} />}
         <button className="submit-btn" type="submit" disabled={loading}>
           {formValues.hasAccount ? "Login" : "Sign up"}
         </button>

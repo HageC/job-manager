@@ -24,7 +24,31 @@ const signup = async (req, res, next) => {
   }
 };
 
-const login = async (req, res) => {};
+const login = async (req, res, next) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return next(new CustomError("Please provide all values", 400));
+  }
+
+  try {
+    const user = await User.findOne({ email }).select("+password");
+    if (!user) {
+      return next(new CustomError("Invalid Values", 401));
+    }
+    const validPassword = await user.comparePassword(password);
+
+    if (!validPassword) {
+      return next(new CustomError("Invalid Values", 401));
+    }
+    const token = user.generateToken();
+    res.status(201).json({
+      user: { email: user.email, name: user.name, location: user.location },
+      token,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 const changeUser = async (req, res) => {};
 
