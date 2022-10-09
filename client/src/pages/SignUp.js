@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Notification } from "../components";
 import { useGlobalState } from "../context/stateContext";
@@ -87,14 +86,12 @@ const StyleWrapper = styled.div`
   }
 `;
 const SignUp = () => {
-  const navigate = useNavigate();
   const values = { hasAccount: true, name: "", email: "", password: "" };
   const {
     notification,
     inputError,
     removeNotification,
     authenticateUser,
-    user,
     loading,
   } = useGlobalState();
   const [formValues, setFormValues] = useState(values);
@@ -120,12 +117,6 @@ const SignUp = () => {
       authenticateUser(inputUser, "signup");
     }
   };
-
-  useEffect(() => {
-    if (user) {
-      navigate("/");
-    }
-  }, [user, navigate]);
 
   return (
     <StyleWrapper>

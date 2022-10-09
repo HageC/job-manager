@@ -4,7 +4,7 @@ import { useGlobalState } from "../../context/stateContext";
 const Protected = ({ children }) => {
   const { user } = useGlobalState();
   if (!user) {
-    return <Navigate to="/signup" />;
+    return <Navigate to="/home" />;
   }
   return children;
 };
