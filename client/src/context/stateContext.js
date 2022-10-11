@@ -7,7 +7,7 @@ const AppContext = React.createContext();
 const user = localStorage.getItem("user");
 const token = localStorage.getItem("token");
 
-const initialValues = {
+export const initialValues = {
   user: user ? JSON.parse(user) : null,
   token: token,
   location: "",
@@ -54,9 +54,20 @@ const AppProvider = ({ children }) => {
     localStorage.removeItem("token");
   };
 
+  const logout = () => {
+    dispatch({ type: "LOGOUT" });
+    deleteLocalStorage();
+  };
+
   return (
     <AppContext.Provider
-      value={{ ...state, inputError, removeNotification, authenticateUser }}
+      value={{
+        ...state,
+        inputError,
+        removeNotification,
+        authenticateUser,
+        logout,
+      }}
     >
       {children}
     </AppContext.Provider>

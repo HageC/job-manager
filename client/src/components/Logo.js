@@ -10,7 +10,11 @@ const Logo = () => {
     );
   }
 
-  return <Link to={"/home"}></Link>;
+  return (
+    <Link to={"/home"}>
+      <img src={logo} alt="logo" style={{ width: "250px", height: "auto" }} />
+    </Link>
+  );
 };
 
 export default Logo;

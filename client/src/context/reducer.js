@@ -1,3 +1,5 @@
+import { initialValues } from "./stateContext";
+
 const reducer = (state, action) => {
   if (action.type === "INPUT_ERROR") {
     return {
@@ -30,6 +32,8 @@ const reducer = (state, action) => {
       token: action.payload.token,
       loading: false,
     };
+  } else if (action.type === "LOGOUT") {
+    return { ...initialValues, user: null, token: null, location: "" };
   }
 };
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
-
+import { useGlobalState } from "../../context/stateContext";
 const StyleWrapper = styled.div.attrs({ className: "dashboard" })`
   .dashboard {
     display: grid;
@@ -53,18 +53,15 @@ const StyleWrapper = styled.div.attrs({ className: "dashboard" })`
 `;
 
 const Layout = () => {
+  const { logout } = useGlobalState();
   return (
     <StyleWrapper>
       <div className="nav-bar">
-        <div className="nav-container">
-          <a href="http://" target="_blank" rel="noopener noreferrer">
-            Create
-          </a>
-        </div>
+        <div className="nav-container"></div>
       </div>
       <div className="dashboard">
         <div className="sidebar">
-          <a href="">Home</a>
+          <h1 onClick={logout}>Logout</h1>
         </div>
 
         <div className="info-section">

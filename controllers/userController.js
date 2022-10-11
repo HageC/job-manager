@@ -50,6 +50,4 @@ const login = async (req, res, next) => {
   }
 };
 
-const changeUser = async (req, res) => {};
-
-export { signup, login, changeUser };
+export { signup, login };
