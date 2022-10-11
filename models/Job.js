@@ -31,3 +31,5 @@ const JobSchema = new mongoose.Schema({
     required: [true, "Please enter user"],
   },
 });
+
+export default mongoose.model("Job", JobSchema);
