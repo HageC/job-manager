@@ -59,6 +59,13 @@ const AppProvider = ({ children }) => {
     deleteLocalStorage();
   };
 
+  const tokenRequest = axios.create({
+    baseURL: "/api",
+    headers: {
+      Authorization: `Bearer ${state.token}`,
+    },
+  });
+
   return (
     <AppContext.Provider
       value={{
@@ -67,6 +74,7 @@ const AppProvider = ({ children }) => {
         removeNotification,
         authenticateUser,
         logout,
+        tokenRequest,
       }}
     >
       {children}
