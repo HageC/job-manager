@@ -2,25 +2,28 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import { useGlobalState } from "../../context/stateContext";
+import { IoStatsChartSharp, IoCreateSharp } from "react-icons/io5";
+import { AiOutlineFileSearch } from "react-icons/ai";
+import { GoSignOut } from "react-icons/go";
+import { BiUser } from "react-icons/bi";
+import { Link } from "react-router-dom";
 const StyleWrapper = styled.div.attrs({ className: "dashboard" })`
   .dashboard {
     display: grid;
     grid-template-columns: auto 1fr;
   }
-
+  h1 {
+    width: auto;
+  }
   .sidebar {
-    width: 300px;
+    width: 250px;
     margin-left: 0;
     padding: 0;
     background-color: #f1f1f1;
     height: 100vh;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  }
-
-  .sidebar a {
-    display: block;
-    padding: 16px;
-    text-decoration: none;
+    display: flex;
+    flex-direction: column;
   }
 
   .info-section {
@@ -33,21 +36,129 @@ const StyleWrapper = styled.div.attrs({ className: "dashboard" })`
     display: none;
     background-color: #f1f1f1;
     height: 4rem;
-    padding: 0.5rem;
+    width: 100%;
+    max-width: 1000px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
 
   .nav-container {
-    max-width: 1200px;
+    width: 100%;
+    max-width: 1000px;
+  }
+
+  .sidebar h1 {
+    font-size: 1.5rem;
+    margin: 0 auto;
+  }
+
+  .sidebar a {
+    font-weight: 500;
+    transition: 0.5s;
+    font-size: 1.5rem;
+    padding: 1rem;
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    color: black;
+  }
+
+  span {
+    margin-left: 1rem;
+    color: #00f;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .sidebar a:hover {
+    transition: 0.5s;
+    background-color: #cbcbcb;
+  }
+
+  .sidebar button:hover {
+    transition: 0.5s;
+    background-color: #cbcbcb;
+  }
+
+  button {
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.5s;
+    font-size: 1.5rem;
+    padding: 1rem;
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    color: black;
+    border: none;
   }
 
   @media only screen and (max-width: 1000px) {
-    .nav-bar {
+    .nav-container a {
+      font-weight: 500;
+      transition: 0.5s;
+      font-size: 1.5rem;
+      padding: 1rem;
       display: flex;
+      text-decoration: none;
       align-items: center;
+      flex: 1 1 0px;
+      color: black;
     }
+
+    span {
+      flex-shrink: 0;
+    }
+
+    .nav-bar {
+      display: block;
+    }
+
+    .nav-container {
+      height: 100%;
+      display: flex;
+      flex-shrink: 1;
+      align-items: center;
+      justify-content: center;
+    }
+
     .sidebar {
-      margin-left: -300px;
+      margin-left: -250px;
+    }
+  }
+
+  @media only screen and (max-width: 840px) {
+    button {
+      padding-left: 0;
+    }
+    span {
+      font-size: 1rem;
+    }
+    .nav-container a {
+      padding: 0;
+      font-size: 1rem;
+    }
+    .nav-container button {
+      font-size: 1rem;
+    }
+  }
+
+  @media only screen and (max-width: 560px) {
+    .nav-container {
+      width: fit-content;
+      padding: 0;
+      font-size: 0.9rem;
+    }
+    span {
+      font-size: 0.9rem;
+    }
+    .nav-container a {
+      width: fit-content;
+      padding: 0;
+      font-size: 0.9rem;
+    }
+    .nav-container button {
+      font-size: 0.9rem;
     }
   }
 `;
@@ -57,11 +168,72 @@ const Layout = () => {
   return (
     <StyleWrapper>
       <div className="nav-bar">
-        <div className="nav-container"></div>
+        <div className="nav-container">
+          <Link to={"/"}>
+            <span>
+              <IoStatsChartSharp />
+            </span>
+            Stats
+          </Link>
+          <Link to={"/create"}>
+            <span>
+              <IoCreateSharp />
+            </span>
+            Add Jobs
+          </Link>
+          <Link to={"/jobs"}>
+            <span>
+              <AiOutlineFileSearch />
+            </span>
+            View Jobs
+          </Link>
+          <Link to={"/profile"}>
+            <span>
+              <BiUser />
+            </span>
+            Account
+          </Link>
+          <button onClick={logout}>
+            <span>
+              <GoSignOut />
+            </span>
+            Logout
+          </button>
+        </div>
       </div>
       <div className="dashboard">
         <div className="sidebar">
-          <h1 onClick={logout}>Logout</h1>
+          <Link to={"/"}>
+            <span>
+              <IoStatsChartSharp />
+            </span>
+            Stats
+          </Link>
+          <Link to={"/create"}>
+            <span>
+              <IoCreateSharp />
+            </span>
+            Create Job
+          </Link>
+          <Link to={"/jobs"}>
+            <span>
+              <AiOutlineFileSearch />
+            </span>
+            View Jobs
+          </Link>
+          <Link to={"/profile"}>
+            <span>
+              <BiUser />
+            </span>
+            Account
+          </Link>
+
+          <button onClick={logout}>
+            <span>
+              <GoSignOut />
+            </span>
+            Logout
+          </button>
         </div>
 
         <div className="info-section">

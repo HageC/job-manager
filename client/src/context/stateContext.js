@@ -19,7 +19,9 @@ export const initialValues = {
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialValues);
-
+  const tokenRequest = axios.create({
+    baseURL: "/api",
+  });
   const inputError = () => {
     dispatch({ type: "INPUT_ERROR" });
   };
@@ -58,13 +60,6 @@ const AppProvider = ({ children }) => {
     dispatch({ type: "LOGOUT" });
     deleteLocalStorage();
   };
-
-  const tokenRequest = axios.create({
-    baseURL: "/api",
-    headers: {
-      Authorization: `Bearer ${state.token}`,
-    },
-  });
 
   return (
     <AppContext.Provider
