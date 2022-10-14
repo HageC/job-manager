@@ -83,7 +83,6 @@ const StyleWrapper = styled.div.attrs({ className: "dashboard" })`
     background-color: transparent;
     cursor: pointer;
     font-weight: 500;
-    transition: 0.5s;
     font-size: 1.5rem;
     padding: 1rem;
     display: flex;
@@ -93,17 +92,29 @@ const StyleWrapper = styled.div.attrs({ className: "dashboard" })`
     border: none;
   }
 
+  .sidebar button {
+    transition: 0.5s;
+  }
+
   @media only screen and (max-width: 1000px) {
     .nav-container a {
       font-weight: 500;
-      transition: 0.5s;
-      font-size: 1.5rem;
+
+      font-size: 1.3rem;
       padding: 1rem;
       display: flex;
       text-decoration: none;
       align-items: center;
-      flex: 1 1 0px;
+
       color: black;
+    }
+
+    button {
+      font-weight: 500;
+      font-size: 1.3rem;
+      padding: 1rem;
+
+      transition: 0;
     }
 
     span {
@@ -117,9 +128,8 @@ const StyleWrapper = styled.div.attrs({ className: "dashboard" })`
     .nav-container {
       height: 100%;
       display: flex;
-      flex-shrink: 1;
-      align-items: center;
       justify-content: center;
+      align-items: center;
     }
 
     .sidebar {
@@ -128,8 +138,8 @@ const StyleWrapper = styled.div.attrs({ className: "dashboard" })`
   }
 
   @media only screen and (max-width: 840px) {
-    button {
-      padding-left: 0;
+    .nav-container {
+      justify-content: center;
     }
     span {
       font-size: 1rem;
@@ -141,15 +151,22 @@ const StyleWrapper = styled.div.attrs({ className: "dashboard" })`
     .nav-container button {
       font-size: 1rem;
     }
+    button {
+      padding: 0;
+    }
   }
 
   @media only screen and (max-width: 560px) {
-    .nav-container {
-      width: fit-content;
+    .nav-container a {
+      margin: 0.4rem;
       padding: 0;
-      font-size: 0.9rem;
+    }
+    button {
+      padding: 0;
+      margin: 0.4rem;
     }
     span {
+      margin: 0;
       font-size: 0.9rem;
     }
     .nav-container a {
