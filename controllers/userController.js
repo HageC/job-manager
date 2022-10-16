@@ -50,4 +50,24 @@ const login = async (req, res, next) => {
   }
 };
 
-export { signup, login };
+const update = async (req, res, next) => {
+  const { email, name, location } = req.body;
+
+  if (!email || !name || !location) {
+    return next(new CustomError("Please provide all values", 400));
+  }
+
+  try {
+    const user = await User.findOne({ _id: req.user.id });
+    user.email = email;
+    user.name = name;
+    user.location = location;
+    await user.save();
+    const token = user.generateToken();
+    res.status(200).json({ user, token });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export { signup, login, update };

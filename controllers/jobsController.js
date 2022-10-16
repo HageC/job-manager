@@ -39,7 +39,26 @@ const getJobs = async (req, res, next) => {
   res.status(200).json({ jobs, amount: jobs.length });
 };
 
-const changeJob = async (req, res, next) => {};
+const changeJob = async (req, res, next) => {
+  const { id } = req.params;
+  const { companyName, jobTitle } = req.body;
+
+  if (!jobTitle || !companyName) {
+    return next(CustomError("Please enter all values", 401));
+  }
+  const job = await Job.findOne({ _id: id });
+
+  if (!job) {
+    return next(new CustomError(`Couldn't find job:${id}`, 404));
+  }
+
+  const newJob = await Job.findOneAndUpdate({ _id: id }, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  res.status(200).json({ newJob });
+};
 
 const jobStats = async (req, res, next) => {};
 

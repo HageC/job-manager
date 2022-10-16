@@ -20,7 +20,7 @@ const StyleWrapper = styled.div.attrs({ className: "dashboard" })`
     margin-left: 0;
     padding: 0;
     background-color: #f1f1f1;
-    height: 100vh;
+    height: calc(100vh - 5rem);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     display: flex;
     flex-direction: column;
@@ -93,6 +93,7 @@ const StyleWrapper = styled.div.attrs({ className: "dashboard" })`
   }
 
   .sidebar button {
+    margin-top: auto;
     transition: 0.5s;
   }
 
