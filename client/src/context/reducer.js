@@ -8,7 +8,7 @@ const reducer = (state, action) => {
       notificationType: "error",
       notificationValue: "Make sure to enter all values",
     };
-  } else if (action.type === "REMOVE_NOTIFICATION") {
+  } else if (action.type === "CLEAR_NOTIFICATION") {
     return {
       ...state,
       notification: false,
@@ -34,10 +34,9 @@ const reducer = (state, action) => {
     };
   } else if (action.type === "LOGOUT") {
     return { ...initialValues, user: null, token: null, location: "" };
-  } else if (action.type === "UPDATE_USER_SUCESS") {
+  } else if (action.type === "UPDATE_USER_SUCCESS") {
     const { user, token } = action.payload;
-
-    return { ...state, token, user, location: user.location };
+    return { ...state, token, user, location: user.location, loading: false };
   } else if (action.type === "UPDATE_USER_ERROR") {
     return {
       ...state,
