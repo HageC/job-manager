@@ -38,6 +38,9 @@ const AppProvider = ({ children }) => {
       return config;
     },
     (error) => {
+      if (error.response.status === 401) {
+        logout();
+      }
       return Promise.reject(error);
     }
   );
@@ -62,6 +65,7 @@ const AppProvider = ({ children }) => {
         type: "AUTHENTICATE_ERROR",
         payload: { message: error.response.data.message },
       });
+      setTimeout(() => removeNotification(), 3000);
     }
   };
   const updateUser = async (inputUser) => {
@@ -79,6 +83,7 @@ const AppProvider = ({ children }) => {
         type: "UPDATE_USER_ERROR",
         payload: { message: error.response.data.message },
       });
+      setTimeout(() => removeNotification(), 3000);
     }
   };
   const saveLocalStorage = ({ user, token }) => {
