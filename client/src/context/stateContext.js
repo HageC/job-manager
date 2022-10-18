@@ -22,6 +22,25 @@ const AppProvider = ({ children }) => {
   const tokenRequest = axios.create({
     baseURL: "/api",
   });
+
+  tokenRequest.interceptors.request.use(
+    (config) => {
+      config.headers["Authorization"] = `Bearer ${state.token}`;
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
+
+  tokenRequest.interceptors.response.use(
+    (config) => {
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
   const inputError = () => {
     dispatch({ type: "INPUT_ERROR" });
   };
@@ -45,7 +64,23 @@ const AppProvider = ({ children }) => {
       });
     }
   };
+  const updateUser = async (inputUser) => {
+    dispatch({ type: "SET_LOADING" });
+    try {
+      const response = await tokenRequest.patch("/user/update", inputUser);
+      const { user, token } = response.data;
 
+      dispatch({ type: "UPDATE_USER_SUCCESS", payload: { user, token } });
+
+      saveLocalStorage({ user, token });
+      removeNotification();
+    } catch (error) {
+      dispatch({
+        type: "UPDATE_USER_ERROR",
+        payload: { message: error.response.data.message },
+      });
+    }
+  };
   const saveLocalStorage = ({ user, token }) => {
     localStorage.setItem("user", JSON.stringify(user));
     localStorage.setItem("token", token);
@@ -69,7 +104,7 @@ const AppProvider = ({ children }) => {
         removeNotification,
         authenticateUser,
         logout,
-        tokenRequest,
+        updateUser,
       }}
     >
       {children}

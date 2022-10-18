@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useGlobalState } from "../../context/stateContext";
-
+import Alert from "../../components/Notification";
 const StyleWrapper = styled.div`
   background-color: #f1f1f1;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   height: 100%;
   max-height: 700px;
   border-radius: 4px;
+  margin-top: 5rem;
   label {
     display: block;
     margin-bottom: 1rem;
@@ -58,7 +59,7 @@ const StyleWrapper = styled.div`
 `;
 
 const Profile = () => {
-  const { user } = useGlobalState();
+  const { user, inputError, updateUser, loading } = useGlobalState();
   const values = {
     name: user?.name,
     email: user?.email,
@@ -68,6 +69,17 @@ const Profile = () => {
 
   const onChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = () => {
+    const { name, email, location } = formValues;
+
+    if (!name && !email && !!location) {
+      inputError();
+      return;
+    }
+
+    updateUser({ name, email, location });
   };
   return (
     <StyleWrapper>
@@ -106,7 +118,10 @@ const Profile = () => {
             <input type="text" name="password" required={true} />
           </div>
 
-          <button className="submit-btn">Submit</button>
+          <button className="submit-btn" onClick={onSubmit} disabled={loading}>
+            Submit
+          </button>
+          <Alert />
         </div>
       </div>
     </StyleWrapper>

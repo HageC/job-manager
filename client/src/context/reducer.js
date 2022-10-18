@@ -34,6 +34,18 @@ const reducer = (state, action) => {
     };
   } else if (action.type === "LOGOUT") {
     return { ...initialValues, user: null, token: null, location: "" };
+  } else if (action.type === "UPDATE_USER_SUCESS") {
+    const { user, token } = action.payload;
+
+    return { ...state, token, user, location: user.location };
+  } else if (action.type === "UPDATE_USER_ERROR") {
+    return {
+      ...state,
+      notification: true,
+      notificationType: "error",
+      notificationValue: action.payload.message,
+      loading: false,
+    };
   }
 };
 
