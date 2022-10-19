@@ -25,7 +25,10 @@ const AppProvider = ({ children }) => {
 
   tokenRequest.interceptors.request.use(
     (config) => {
-      config.headers["Authorization"] = `Bearer ${state.token}`;
+      const checkToken = localStorage.getItem("token");
+      if (checkToken) {
+        config.headers["Authorization"] = `Bearer ${state.token}`;
+      }
       return config;
     },
     (error) => {
@@ -38,7 +41,10 @@ const AppProvider = ({ children }) => {
       return config;
     },
     (error) => {
-      if (error.response.status === 401) {
+      if (
+        error.response.status === 401 &&
+        error.response.data.message !== "Invalid Password"
+      ) {
         logout();
       }
       return Promise.reject(error);

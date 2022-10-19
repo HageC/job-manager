@@ -51,14 +51,18 @@ const login = async (req, res, next) => {
 };
 
 const update = async (req, res, next) => {
-  const { email, name, location } = req.body;
+  const { email, name, location, password } = req.body;
 
-  if (!email || !name || !location) {
+  if (!email || !name || !location || !password) {
     return next(new CustomError("Please provide all values", 400));
   }
 
   try {
-    const user = await User.findOne({ _id: req.user.id });
+    const user = await User.findOne({ _id: req.user.id }).select("+password");
+    const validPassword = await user.comparePassword(password);
+    if (!validPassword) {
+      return next(new CustomError("Invalid Password", 401));
+    }
     user.email = email;
     user.name = name;
     user.location = location;

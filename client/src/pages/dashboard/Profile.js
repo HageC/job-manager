@@ -64,6 +64,7 @@ const Profile = () => {
     name: user?.name,
     email: user?.email,
     location: user?.location,
+    password: "",
   };
   const [formValues, setFormValues] = useState(values);
 
@@ -71,58 +72,71 @@ const Profile = () => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = () => {
-    const { name, email, location } = formValues;
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const { name, email, location, password } = formValues;
 
-    if (!name && !email && !!location) {
+    if (!name || !email || !location || !password) {
       inputError();
       return;
     }
 
-    updateUser({ name, email, location });
+    updateUser({ name, email, location, password });
   };
   return (
     <StyleWrapper>
       <div className="profile">
-        <h1>Profile</h1>
-        <div className="profile-rows">
-          <div className="form-input">
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              name="name"
-              onChange={onChange}
-              value={formValues.name}
-            />
-          </div>
-          <div className="form-input">
-            <label htmlFor="location">Location</label>
-            <input
-              type="text"
-              name="location"
-              onChange={onChange}
-              value={formValues.location}
-            />
-          </div>
-          <div className="form-input">
-            <label htmlFor="email">Email</label>
-            <input
-              type="text"
-              name="email"
-              onChange={onChange}
-              value={formValues.email}
-            />
-          </div>
-          <div className="form-input">
-            <label htmlFor="password">Confirm Password</label>
-            <input type="text" name="password" required={true} />
-          </div>
+        <form onSubmit={onSubmit}>
+          <h1>Profile</h1>
+          <div className="profile-rows">
+            <div className="form-input">
+              <label htmlFor="name">Name</label>
+              <input
+                type="text"
+                name="name"
+                onChange={onChange}
+                value={formValues.name}
+                autoComplete="true"
+              />
+            </div>
+            <div className="form-input">
+              <label htmlFor="location">Location</label>
+              <input
+                type="text"
+                name="location"
+                onChange={onChange}
+                value={formValues.location}
+                autoComplete="true"
+              />
+            </div>
+            <div className="form-input">
+              <label htmlFor="email">Email</label>
+              <input
+                type="text"
+                name="email"
+                onChange={onChange}
+                value={formValues.email}
+                autoComplete="true"
+              />
+            </div>
+            <div className="form-input">
+              <label htmlFor="password">Confirm Password</label>
+              <input
+                type="password"
+                name="password"
+                required={true}
+                onChange={onChange}
+                value={formValues.password}
+                autoComplete="true"
+              />
+            </div>
 
-          <button className="submit-btn" onClick={onSubmit} disabled={loading}>
-            Submit
-          </button>
-          <Alert />
-        </div>
+            <button className="submit-btn" type="submit" disabled={loading}>
+              Change
+            </button>
+            <Alert />
+          </div>
+        </form>
       </div>
     </StyleWrapper>
   );
