@@ -14,11 +14,18 @@ const StyleWrapper = styled.div`
 
   .arrows {
     display: flex;
+    justify-content: center;
     width: 200px;
     margin: 2rem auto 0 auto;
   }
 
-  span:hover {
+  .arrow {
+    color: #00f;
+    font-size: 1.3rem;
+    margin: 0 1rem;
+  }
+
+  .arrow:hover {
     cursor: pointer;
     color: #00a;
   }
@@ -56,13 +63,13 @@ const Jobs = () => {
       </div>
 
       <div className="arrows">
-        <span onClick={decrease}>
+        <div className="arrow" onClick={decrease}>
           <AiOutlineArrowLeft />
-        </span>
+        </div>
         <p>{`${page} of ${pageCount}`}</p>
-        <span onClick={increase}>
+        <div className="arrow" onClick={increase}>
           <AiOutlineArrowRight />
-        </span>
+        </div>
       </div>
     </StyleWrapper>
   );
