@@ -15,6 +15,8 @@ export const initialValues = {
   notificationValue: "",
   notificationType: "",
   loading: false,
+  statusOptions: ["interview", "declined", "pending"],
+  jobTypeOptions: ["full-time", "part-time", "remote", "internship"],
 };
 
 const AppProvider = ({ children }) => {
@@ -83,15 +85,29 @@ const AppProvider = ({ children }) => {
       dispatch({ type: "UPDATE_USER_SUCCESS", payload: { user, token } });
 
       saveLocalStorage({ user, token });
-      removeNotification();
     } catch (error) {
       dispatch({
         type: "UPDATE_USER_ERROR",
         payload: { message: error.response.data.message },
       });
-      setTimeout(() => removeNotification(), 3000);
     }
+    setTimeout(() => removeNotification(), 3000);
   };
+
+  const createJob = async (inputJob) => {
+    dispatch({ type: "SET_LOADING" });
+    try {
+      await tokenRequest.post("/jobs/", inputJob);
+      dispatch({ type: "CREATE_JOB_SUCCESS" });
+    } catch (error) {
+      dispatch({
+        type: "CREATE_JOB_ERROR",
+        payload: { message: error.response.data.message },
+      });
+    }
+    setTimeout(() => removeNotification(), 3000);
+  };
+
   const saveLocalStorage = ({ user, token }) => {
     localStorage.setItem("user", JSON.stringify(user));
     localStorage.setItem("token", token);
@@ -116,6 +132,7 @@ const AppProvider = ({ children }) => {
         authenticateUser,
         logout,
         updateUser,
+        createJob,
       }}
     >
       {children}

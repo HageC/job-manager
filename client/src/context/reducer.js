@@ -36,7 +36,16 @@ const reducer = (state, action) => {
     return { ...initialValues, user: null, token: null, location: "" };
   } else if (action.type === "UPDATE_USER_SUCCESS") {
     const { user, token } = action.payload;
-    return { ...state, token, user, location: user.location, loading: false };
+    return {
+      ...state,
+      token,
+      user,
+      location: user.location,
+      loading: false,
+      notification: true,
+      notificationType: "success",
+      notificationValue: "User information has been updated.",
+    };
   } else if (action.type === "UPDATE_USER_ERROR") {
     return {
       ...state,
@@ -44,6 +53,22 @@ const reducer = (state, action) => {
       notificationType: "error",
       notificationValue: action.payload.message,
       loading: false,
+    };
+  } else if (action.type === "CREATE_JOB_SUCCESS") {
+    return {
+      ...state,
+      loading: false,
+      notification: true,
+      notificationType: "success",
+      notificationValue: "Job has been created.",
+    };
+  } else if (action.type === "CREATE_JOB_ERROR") {
+    return {
+      ...state,
+      loading: false,
+      notification: true,
+      notificationType: "error",
+      notificationValue: action.payload.message,
     };
   }
 };

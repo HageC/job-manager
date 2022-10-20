@@ -7,13 +7,14 @@ const addJob = async (req, res, next) => {
     return next(new CustomError("Please enter all values", 400));
   }
 
-  const createdJob = await Job.create({
-    jobTitle,
-    companyName,
-    createdBy: req.user.id,
-  });
+  req.body.createdBy = req.user.id;
 
-  res.status(201).json({ createdJob });
+  try {
+    const createdJob = await Job.create(req.body);
+    res.status(201).json({ createdJob });
+  } catch (error) {
+    next(error);
+  }
 };
 
 const removeJob = async (req, res, next) => {
@@ -27,16 +28,21 @@ const removeJob = async (req, res, next) => {
   if (!(req.user.id === job.createdBy.toString())) {
     return next(new CustomError("Not authorized", 401));
   }
-
-  await job.remove();
-
-  res.status(200).json({ message: "Job has been removed." });
+  try {
+    await job.remove();
+    res.status(200).json({ message: "Job has been removed." });
+  } catch (error) {
+    next(error);
+  }
 };
 
 const getJobs = async (req, res, next) => {
-  const jobs = await Job.find({ createdBy: req.user.id });
-
-  res.status(200).json({ jobs, amount: jobs.length });
+  try {
+    const jobs = await Job.find({ createdBy: req.user.id });
+    res.status(200).json({ jobs, amount: jobs.length });
+  } catch (error) {
+    next(error);
+  }
 };
 
 const changeJob = async (req, res, next) => {
@@ -51,13 +57,15 @@ const changeJob = async (req, res, next) => {
   if (!job) {
     return next(new CustomError(`Couldn't find job:${id}`, 404));
   }
-
-  const newJob = await Job.findOneAndUpdate({ _id: id }, req.body, {
-    new: true,
-    runValidators: true,
-  });
-
-  res.status(200).json({ newJob });
+  try {
+    const newJob = await Job.findOneAndUpdate({ _id: id }, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    res.status(200).json({ newJob });
+  } catch (error) {
+    next(error);
+  }
 };
 
 const jobStats = async (req, res, next) => {};

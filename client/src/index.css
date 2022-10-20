@@ -64,3 +64,8 @@ h6 {
   color: red;
   text-decoration: underline;
 }
+
+.success {
+  text-align: center;
+  color: goldenrod;
+}

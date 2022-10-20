@@ -8,7 +8,8 @@ const StyleWrapper = styled.div`
   height: 100%;
   max-height: 700px;
   border-radius: 4px;
-  margin-top: 5rem;
+  margin: 5rem 2rem 0 2rem;
+
   label {
     display: block;
     margin-bottom: 1rem;
@@ -82,6 +83,7 @@ const Profile = () => {
     }
 
     updateUser({ name, email, location, password });
+    setFormValues({ ...formValues, password: "" });
   };
   return (
     <StyleWrapper>
