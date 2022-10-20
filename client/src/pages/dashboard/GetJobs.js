@@ -1,7 +1,8 @@
 import React from "react";
+import { Jobs } from "../../components";
 
 const GetJobs = () => {
-  return <div>GetJobs</div>;
+  return <Jobs />;
 };
 
 export default GetJobs;

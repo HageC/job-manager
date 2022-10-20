@@ -70,6 +70,11 @@ const reducer = (state, action) => {
       notificationType: "error",
       notificationValue: action.payload.message,
     };
+  } else if (action.type === "GET_JOBS_SUCCESS") {
+    return {
+      ...state,
+      loading: false,
+    };
   }
 };
 

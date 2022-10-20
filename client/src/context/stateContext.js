@@ -17,6 +17,9 @@ export const initialValues = {
   loading: false,
   statusOptions: ["interview", "declined", "pending"],
   jobTypeOptions: ["full-time", "part-time", "remote", "internship"],
+  jobs: [],
+  page: 1,
+  pageCount: 1,
 };
 
 const AppProvider = ({ children }) => {
@@ -108,6 +111,16 @@ const AppProvider = ({ children }) => {
     setTimeout(() => removeNotification(), 3000);
   };
 
+  const getJobs = async () => {
+    dispatch({ type: "SET_LOADING" });
+    try {
+      const response = await tokenRequest.get("/jobs/");
+      const data = response.data;
+    } catch (error) {
+      logout();
+    }
+  };
+
   const saveLocalStorage = ({ user, token }) => {
     localStorage.setItem("user", JSON.stringify(user));
     localStorage.setItem("token", token);
@@ -133,6 +146,7 @@ const AppProvider = ({ children }) => {
         logout,
         updateUser,
         createJob,
+        getJobs,
       }}
     >
       {children}
