@@ -41,11 +41,11 @@ const getJobs = async (req, res, next) => {
   const skip = (page - 1) * 10;
 
   try {
-    const jobs = await Job.find({ createdBy: req.user.id });
-    jobs = jobs.skip(skip).limit(10);
+    const jobs = await Job.find({ createdBy: req.user.id })
+      .skip(skip)
+      .limit(10);
     const jobsCount = await Job.countDocuments({ createdBy: req.user.id });
     const pageCount = Math.ceil(jobsCount / 10);
-
     res.status(200).json({ jobs, jobsCount, pageCount });
   } catch (error) {
     next(error);

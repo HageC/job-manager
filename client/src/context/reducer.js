@@ -74,6 +74,9 @@ const reducer = (state, action) => {
     return {
       ...state,
       loading: false,
+      jobs: action.payload.jobs,
+      jobsCount: action.payload.jobsCount,
+      pageCount: action.payload.pageCount,
     };
   }
 };

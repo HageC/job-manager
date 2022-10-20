@@ -18,6 +18,7 @@ export const initialValues = {
   statusOptions: ["interview", "declined", "pending"],
   jobTypeOptions: ["full-time", "part-time", "remote", "internship"],
   jobs: [],
+  jobsCount: 0,
   page: 1,
   pageCount: 1,
 };
@@ -114,9 +115,14 @@ const AppProvider = ({ children }) => {
   const getJobs = async () => {
     dispatch({ type: "SET_LOADING" });
     try {
-      const response = await tokenRequest.get("/jobs/");
-      const data = response.data;
+      const response = await tokenRequest.get(`/jobs?page=${state.page}`);
+      const { jobs, jobsCount, pageCount } = response.data;
+      dispatch({
+        type: "GET_JOBS_SUCCESS",
+        payload: { jobs, jobsCount, pageCount },
+      });
     } catch (error) {
+      console.log(error);
       logout();
     }
   };

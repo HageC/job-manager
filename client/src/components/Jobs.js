@@ -3,7 +3,9 @@ import { useGlobalState } from "../context/stateContext";
 
 const Jobs = () => {
   const { page, loading, jobs, getJobs } = useGlobalState();
-  useEffect(() => {}, [page]);
+  useEffect(() => {
+    getJobs();
+  }, [page]);
   return <div>Jobs</div>;
 };
 
