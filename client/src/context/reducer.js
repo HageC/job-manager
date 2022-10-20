@@ -78,6 +78,8 @@ const reducer = (state, action) => {
       jobsCount: action.payload.jobsCount,
       pageCount: action.payload.pageCount,
     };
+  } else if (action.type === "CHANGE_PAGE") {
+    return { ...state, page: action.payload.page };
   }
 };
 

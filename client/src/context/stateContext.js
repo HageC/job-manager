@@ -127,6 +127,10 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  const changePage = (page) => {
+    dispatch({ type: "CHANGE_PAGE", payload: { page } });
+  };
+
   const saveLocalStorage = ({ user, token }) => {
     localStorage.setItem("user", JSON.stringify(user));
     localStorage.setItem("token", token);
@@ -153,6 +157,7 @@ const AppProvider = ({ children }) => {
         updateUser,
         createJob,
         getJobs,
+        changePage,
       }}
     >
       {children}
