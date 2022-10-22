@@ -54,6 +54,11 @@ const Jobs = () => {
     }
     changePage(nextPage);
   };
+
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
+
   return (
     <StyleWrapper>
       <div className="job-grid">

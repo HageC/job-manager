@@ -122,7 +122,17 @@ const AppProvider = ({ children }) => {
         payload: { jobs, jobsCount, pageCount },
       });
     } catch (error) {
-      console.log(error);
+      logout();
+    }
+  };
+
+  const removeJob = async (id) => {
+    dispatch({ type: "SET_LOADING" });
+
+    try {
+      await tokenRequest.delete(`/jobs/${id}`);
+      getJobs();
+    } catch (error) {
       logout();
     }
   };
@@ -158,6 +168,7 @@ const AppProvider = ({ children }) => {
         createJob,
         getJobs,
         changePage,
+        removeJob,
       }}
     >
       {children}

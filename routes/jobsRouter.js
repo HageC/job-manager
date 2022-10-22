@@ -10,6 +10,6 @@ import {
 
 router.route("/").post(addJob).get(getJobs);
 router.route("/jobStats").post(jobStats);
-router.route("/:userID").delete(removeJob).patch(changeJob);
+router.route("/:id").delete(removeJob).patch(changeJob);
 
 export default router;
