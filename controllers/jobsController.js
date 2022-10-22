@@ -38,6 +38,9 @@ const removeJob = async (req, res, next) => {
 
 const getJobs = async (req, res, next) => {
   const { page } = req.query;
+  if (page < 1) {
+    return next(new CustomError("Page doesn't exist", 404));
+  }
   const skip = (page - 1) * 10;
 
   try {
@@ -46,6 +49,7 @@ const getJobs = async (req, res, next) => {
       .limit(10);
     const jobsCount = await Job.countDocuments({ createdBy: req.user.id });
     const pageCount = Math.ceil(jobsCount / 10);
+
     res.status(200).json({ jobs, jobsCount, pageCount });
   } catch (error) {
     next(error);

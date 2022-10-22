@@ -29,6 +29,12 @@ const StyleWrapper = styled.div`
     cursor: pointer;
     color: #00a;
   }
+
+  .job-error {
+    width: 800px;
+    text-align: center;
+    margin: 0 auto;
+  }
 `;
 
 const Jobs = () => {
@@ -67,15 +73,19 @@ const Jobs = () => {
         })}
       </div>
 
-      <div className="arrows">
-        <div className="arrow" onClick={decrease}>
-          <AiOutlineArrowLeft />
+      {pageCount > 0 ? (
+        <div className="arrows">
+          <div className="arrow" onClick={decrease}>
+            <AiOutlineArrowLeft />
+          </div>
+          <p>{`${page} of ${pageCount}`}</p>
+          <div className="arrow" onClick={increase}>
+            <AiOutlineArrowRight />
+          </div>
         </div>
-        <p>{`${page} of ${pageCount}`}</p>
-        <div className="arrow" onClick={increase}>
-          <AiOutlineArrowRight />
-        </div>
-      </div>
+      ) : (
+        <h1 className="job-error">You have no jobs, go create some first.</h1>
+      )}
     </StyleWrapper>
   );
 };
