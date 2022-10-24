@@ -22,6 +22,10 @@ const StyleWrapper = styled.div`
     font-size: 1.4rem;
   }
 
+  .header svg:hover {
+    color: darkred;
+  }
+
   .company {
     display: flex;
     align-items: center;
@@ -34,12 +38,12 @@ const StyleWrapper = styled.div`
 
   .location {
     margin-left: auto;
-
     font-size: 1.1rem;
   }
 
   .location p {
     font-weight: 300;
+    max-width: 200px;
   }
 
   .type p {
