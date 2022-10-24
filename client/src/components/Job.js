@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import moment from "moment";
 import { AiFillDelete } from "react-icons/ai";
 import { useGlobalState } from "../context/stateContext";
 const StyleWrapper = styled.div`
@@ -45,6 +46,11 @@ const StyleWrapper = styled.div`
     text-transform: capitalize;
     font-weight: 300;
   }
+  .status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
   .status p {
     margin-top: 0.5rem;
@@ -54,8 +60,18 @@ const StyleWrapper = styled.div`
   }
 `;
 
-const Job = ({ jobTitle, companyName, status, jobType, location, _id }) => {
+const Job = ({
+  jobTitle,
+  companyName,
+  status,
+  jobType,
+  location,
+  _id,
+  createdAt,
+}) => {
   const { removeJob } = useGlobalState();
+  let date = moment(createdAt);
+  date = date.format("MMM Do, YYYY");
   return (
     <StyleWrapper>
       <div className="job">
@@ -76,6 +92,7 @@ const Job = ({ jobTitle, companyName, status, jobType, location, _id }) => {
 
         <div className="status">
           <p>Status: {status}</p>
+          <p>{date}</p>
         </div>
       </div>
     </StyleWrapper>
