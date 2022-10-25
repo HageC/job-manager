@@ -45,7 +45,8 @@ const StyleWrapper = styled.div`
     display: block;
     margin: 2rem auto 2rem auto;
     padding: 0.5rem;
-    width: 40%;
+    width: 100%;
+    max-width: 400px;
     border: none;
     border-radius: 4px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;

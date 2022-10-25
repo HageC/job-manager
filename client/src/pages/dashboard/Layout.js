@@ -28,7 +28,7 @@ const StyleWrapper = styled.div.attrs({ className: "dashboard" })`
 
   .info-section {
     width: 100%;
-    max-width: 1000px;
+    max-width: 1400px;
     margin: 4rem auto 0 auto;
   }
 
