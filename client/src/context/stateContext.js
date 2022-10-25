@@ -137,6 +137,12 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  const getStats = async () => {
+    const response = await tokenRequest.get("/jobs/jobStats");
+    const data = response.data;
+    console.log(data);
+  };
+
   const changePage = (page) => {
     dispatch({ type: "CHANGE_PAGE", payload: { page } });
   };
@@ -169,6 +175,7 @@ const AppProvider = ({ children }) => {
         getJobs,
         changePage,
         removeJob,
+        getStats,
       }}
     >
       {children}

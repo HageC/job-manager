@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import CustomError from "../error/custom-error.js";
 import Job from "../models/Job.js";
 
@@ -79,6 +80,28 @@ const changeJob = async (req, res, next) => {
   }
 };
 
-const jobStats = async (req, res, next) => {};
+const jobStats = async (req, res, next) => {
+  try {
+    let stats = await Job.aggregate([
+      { $match: { createdBy: mongoose.Types.ObjectId(req.user.id) } },
+      { $group: { _id: "$status", count: { $sum: 1 } } },
+    ]);
+
+    stats = stats.reduce((total, current) => {
+      const { _id: title, count } = current;
+      total[title] = count;
+      return total;
+    }, {});
+
+    const jobStats = {
+      pending: stats.pending || 0,
+      interview: stats.interview || 0,
+      declined: stats.declined || 0,
+    };
+    res.status(200).json({ jobStats });
+  } catch (error) {
+    next(error);
+  }
+};
 
 export { addJob, removeJob, getJobs, changeJob, jobStats };
