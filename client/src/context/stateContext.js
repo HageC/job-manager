@@ -21,6 +21,7 @@ export const initialValues = {
   jobsCount: 0,
   page: 1,
   pageCount: 1,
+  stats: {},
 };
 
 const AppProvider = ({ children }) => {
@@ -138,9 +139,15 @@ const AppProvider = ({ children }) => {
   };
 
   const getStats = async () => {
-    const response = await tokenRequest.get("/jobs/jobStats");
-    const data = response.data;
-    console.log(data);
+    dispatch({ type: "SET_LOADING" });
+
+    try {
+      const response = await tokenRequest.get("/jobs/jobStats");
+      const { jobStats } = response.data;
+      dispatch({ type: "GET_STATS_SUCCESS", payload: { jobStats } });
+    } catch (error) {
+      logout();
+    }
   };
 
   const changePage = (page) => {
