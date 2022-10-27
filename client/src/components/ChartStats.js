@@ -18,7 +18,7 @@ const ChartStats = ({ data }) => {
         <XAxis dataKey="date" />
         <YAxis />
 
-        <Bar dataKey="count" fill="#2cb1bc" barSize={75} />
+        <Bar dataKey="count" fill="#00F" barSize={75} />
       </BarChart>
     </ResponsiveContainer>
   );
