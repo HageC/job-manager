@@ -18,6 +18,7 @@ export const initialValues = {
   statusOptions: ["interview", "declined", "pending"],
   jobTypeOptions: ["full-time", "part-time", "remote", "internship"],
   jobs: [],
+  monthStats: [],
   jobsCount: 0,
   page: 1,
   pageCount: 1,
@@ -143,8 +144,11 @@ const AppProvider = ({ children }) => {
 
     try {
       const response = await tokenRequest.get("/jobs/jobStats");
-      const { jobStats } = response.data;
-      dispatch({ type: "GET_STATS_SUCCESS", payload: { jobStats } });
+      const { jobStats, monthStats } = response.data;
+      dispatch({
+        type: "GET_STATS_SUCCESS",
+        payload: { jobStats, monthStats },
+      });
     } catch (error) {
       logout();
     }

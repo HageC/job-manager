@@ -3,6 +3,7 @@ import { useGlobalState } from "../context/stateContext";
 import styled from "styled-components";
 import { Job } from "./";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import noJob from "../assets/no-job.svg";
 const StyleWrapper = styled.div`
   margin: 5rem 2rem 0 2rem;
 
@@ -34,6 +35,13 @@ const StyleWrapper = styled.div`
     width: 800px;
     text-align: center;
     margin: 0 auto;
+  }
+
+  .no-job-img {
+    margin: 7rem auto 0 auto;
+
+    width: 800px;
+    height: auto;
   }
 `;
 
@@ -84,7 +92,10 @@ const Jobs = () => {
           </div>
         </div>
       ) : (
-        <h1 className="job-error">You have no jobs, go create some first.</h1>
+        <>
+          <h1 className="job-error">You have no jobs, go create some first.</h1>
+          <img className="no-job-img" src={noJob} alt="" />
+        </>
       )}
     </StyleWrapper>
   );

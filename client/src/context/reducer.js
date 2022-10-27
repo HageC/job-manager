@@ -81,7 +81,12 @@ const reducer = (state, action) => {
   } else if (action.type === "CHANGE_PAGE") {
     return { ...state, page: action.payload.page };
   } else if (action.type === "GET_STATS_SUCCESS") {
-    return { ...state, stats: action.payload.jobStats, loading: false };
+    return {
+      ...state,
+      stats: action.payload.jobStats,
+      monthStats: action.payload.monthStats,
+      loading: false,
+    };
   }
 };
 

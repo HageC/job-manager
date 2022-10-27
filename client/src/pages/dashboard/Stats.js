@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { useGlobalState } from "../../context/stateContext";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-
+import { ChartStats } from "../../components";
+import dataSvg from "../../assets/data.svg";
 const StyleWrapper = styled.div`
   margin: 5rem 1rem 0 1rem;
   .stats {
     display: flex;
     justify-content: center;
+    margin-bottom: 2rem;
   }
 
   .stats div {
@@ -29,10 +30,16 @@ const StyleWrapper = styled.div`
     margin-top: 1rem;
     font-weight: 400;
   }
+
+  .data-img {
+    margin: 7rem auto 0 auto;
+    width: 700px;
+    height: auto;
+  }
 `;
 
 const Stats = () => {
-  const { getStats, stats, loading } = useGlobalState();
+  const { getStats, stats, loading, monthStats: data } = useGlobalState();
   useEffect(() => {
     getStats();
   }, []);
@@ -58,6 +65,11 @@ const Stats = () => {
           <h1 className="stat">{stats.declined}</h1>
         </div>
       </div>
+      {data.length > 0 ? (
+        <ChartStats data={data} />
+      ) : (
+        <img className="data-img" src={dataSvg} />
+      )}
     </StyleWrapper>
   );
 };

@@ -17,7 +17,7 @@ const ChartStats = ({ data }) => {
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="date" />
         <YAxis />
-        <Tooltip />
+
         <Bar dataKey="count" fill="#2cb1bc" barSize={75} />
       </BarChart>
     </ResponsiveContainer>
