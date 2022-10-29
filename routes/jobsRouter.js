@@ -4,12 +4,11 @@ import {
   addJob,
   removeJob,
   getJobs,
-  changeJob,
   jobStats,
 } from "../controllers/jobsController.js";
 
 router.route("/").post(addJob).get(getJobs);
 router.route("/jobStats").get(jobStats);
-router.route("/:id").delete(removeJob).patch(changeJob);
+router.route("/:id").delete(removeJob);
 
 export default router;

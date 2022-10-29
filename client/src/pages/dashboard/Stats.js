@@ -4,7 +4,8 @@ import styled from "styled-components";
 import { ChartStats } from "../../components";
 import dataSvg from "../../assets/data.svg";
 const StyleWrapper = styled.div`
-  margin: 5rem 1rem 0 1rem;
+  margin: 5rem auto 0 auto;
+  width: 90%;
   .stats {
     display: flex;
     justify-content: center;
@@ -41,7 +42,6 @@ const StyleWrapper = styled.div`
 
   @media only screen and (max-width: 750px) {
     .stats {
-      margin: 0 1rem;
       flex-direction: column;
     }
 
@@ -55,6 +55,7 @@ const Stats = () => {
   const { getStats, stats, loading, monthStats: data } = useGlobalState();
   useEffect(() => {
     getStats();
+    // eslint-disable-next-line
   }, []);
 
   if (loading) {

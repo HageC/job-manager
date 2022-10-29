@@ -6,12 +6,23 @@ import jobsRouter from "./routes/jobsRouter.js";
 import mongoose from "mongoose";
 import authenticate from "./middleware/authenticate.js";
 import "dotenv/config";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import path from "path";
+
 const app = express();
 const port = process.env.PORT || 5000;
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+app.use(express.static(path.resolve(__dirname, "./client/build")));
 app.use(express.json());
 
 app.use("/api/user/", userRouter);
 app.use("/api/jobs/", authenticate, jobsRouter);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+});
 
 app.use(notFound);
 app.use(errorHandler);
