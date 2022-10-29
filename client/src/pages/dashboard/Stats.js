@@ -8,17 +8,19 @@ const StyleWrapper = styled.div`
   .stats {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-bottom: 2rem;
   }
 
   .stats div {
+    width: 100%;
     color: black;
     background-color: #f1f1f1;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     border-radius: 2px;
     padding: 1rem;
     margin: 0 1rem;
-    width: 600px;
+    max-width: 600px;
   }
 
   h1 {
@@ -35,6 +37,17 @@ const StyleWrapper = styled.div`
     margin: 7rem auto 0 auto;
     width: 700px;
     height: auto;
+  }
+
+  @media only screen and (max-width: 750px) {
+    .stats {
+      margin: 0 1rem;
+      flex-direction: column;
+    }
+
+    .stats div {
+      margin: 0 auto 2rem auto;
+    }
   }
 `;
 
@@ -68,7 +81,7 @@ const Stats = () => {
       {data.length > 0 ? (
         <ChartStats data={data} />
       ) : (
-        <img className="data-img" src={dataSvg} />
+        <img className="data-img" src={dataSvg} alt="not found" />
       )}
     </StyleWrapper>
   );
